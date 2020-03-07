@@ -1,10 +1,22 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
+
+const Post = require('./model/post');
 
 const app = express();
 
+mongoose.connect('mongodb+srv://chiran:tevo1NqT1TupRAFo@cluster0-sylop.mongodb.net/postapp?retryWrites=true&w=majority',
+  { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => {
+    console.log('Connected to monogodb database..');
+  })
+  .catch(() => {
+    console.log('Connection to database failed!');
+  });
+
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.urlencoded({ extended: false }));
 
 //Allow CROS
 app.use((req, res, next) => {
@@ -19,32 +31,42 @@ app.use((req, res, next) => {
 });
 
 //POST data (posts)
-app.post("/api/posts",(req, res, next) => {
-  const post= req.body;
-  //to check
-  console.log(post);
-  res.status(201).json({
-    message: 'Post added successfully!'
+app.post("/api/posts", (req, res, next) => {
+  const post = new Post({
+    title: req.body.title,
+    content: req.body.content
   });
+
+  post.save().then(result => {
+    res.status(201).json({
+      message: 'Post added successfully!',
+      postId: result.id
+    });
+  });
+
 });
 
 //get posts
 app.get("/api/posts", (req, res, next) => {
-  const posts = [{
-    id: "23fefef",
-    title: "First Server Post",
-    content: "Smaple Content"
-  },
-  {
-    id: "343fgdf",
-    title: "Second Server Post",
-    content: "Smaple Content"
-  }
-  ];
-  res.status(200).json({
-    message: "Posts fetchd Successfully!",
-    posts: posts
+  Post.find().then(documents => {
+    //it's important to put this inside as this is asynchronous (data must get from db first before fetching)
+    res.status(200).json({
+      message: "Posts fetchd Successfully!",
+      posts: documents
+    });
   });
+
+});
+
+app.delete("/api/posts/:id", (req, res, next) => {
+  Post.deleteOne({ id: req.param.id }).then(result => {
+    console.log(result);
+
+    res.status(200).json({
+      message: 'Post deleted successfully!'
+    });
+  })
+
 });
 
 module.exports = app;
