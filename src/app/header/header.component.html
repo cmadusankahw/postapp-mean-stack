@@ -1,9 +1,40 @@
+
+
 <mat-toolbar color="primary">
-<mat-toolbar-row>
-  <mat-icon class="mtbtn">face</mat-icon>
-  <span class="mtbtn">Facobbok Clone</span>
+
+  <span routerLink="/">
+    <mat-icon>face</mat-icon> PostApp
+  </span>
   <span class="example-spacer"></span>
-  <mat-icon class="example-icon mtbtn" aria-hidden="false" aria-label="Example heart icon">favorite</mat-icon>
-  <mat-icon class="example-icon mtbtn" aria-hidden="false" aria-label="Example delete icon">delete</mat-icon>
-</mat-toolbar-row>
+
+  <!-- This fills the remaining space of the current row -->
+  <span class="fill-remaining-space"></span>
+  <div fxLayout="row" fxShow="false" fxShow.gt-sm>
+
+
+    <button mat-button routerLink="/" >
+      <mat-icon>book</mat-icon>
+      View Posts</button>
+
+    <button mat-button routerLink="create" routerLinkActive="mat-accent">
+      <mat-icon>person_add</mat-icon>
+      Create New Post</button>
+
+  </div>
+  <button mat-button [mat-menu-trigger-for]="menu" fxHide="false" fxHide.gt-sm>
+   <mat-icon>menu</mat-icon>
+  </button>
+
 </mat-toolbar>
+
+<mat-menu x-position="before" #menu="matMenu">
+
+    <button mat-button routerLink="/" >
+      <mat-icon>book</mat-icon>
+      View Posts</button>
+   <br>
+    <button mat-button routerLink="create" routerLinkActive="mat-accent">
+      <mat-icon>person_add</mat-icon>
+      Create New Post</button>
+
+</mat-menu>

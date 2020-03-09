@@ -1,15 +1,16 @@
 <br />
-<h3>Create a Post</h3>
+<h3>{{btntxt}}</h3>
 <hr />
+<mat-spinner *ngIf= "this.isLoading"></mat-spinner>
 <mat-card>
-  <form (submit)= "createPost(postForm)" #postForm="ngForm">
+  <form (submit)= "createPost(postForm)" #postForm="ngForm" *ngIf="!this.isLoading">
     <mat-form-field lass="example-full-width">
       <mat-label>Post Title</mat-label>
       <input
       matInput
       type="text"
       name="title"
-      ngModel
+      [ngModel]="loadedPost?.title"
       required
       minlength="5"
       #title="ngModel"/>
@@ -21,13 +22,13 @@
         matInput
         rows="6"
         name="content"
-        ngModel
+        [ngModel]="loadedPost?.content"
         #content="ngModel">
       </textarea>
     </mat-form-field>
 
     <button mat-raised-button color="primary" type="submit">
-      Create Post
+      {{btntxt}}
     </button>
   </form>
 </mat-card>

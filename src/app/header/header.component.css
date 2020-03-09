@@ -5,6 +5,8 @@
 .example-spacer {
   flex: 1 1 auto;
 }
-.mtbtn{
-  cursor: pointer;
-}
+
+.fill-remaining-space {
+
+  flex: 1 1 auto;
+ }

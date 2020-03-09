@@ -9,6 +9,11 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {HttpClientModule} from '@angular/common/http';
+import {MatBadgeModule} from '@angular/material/badge';
+import {FlexLayoutModule} from '@angular/flex-layout';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -16,6 +21,7 @@ import { PostsComponent } from './post/posts/posts.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HeaderComponent } from './header/header.component';
 import { PostListComponent } from './post/post-list/post-list.component';
+import {MatMenuModule} from '@angular/material/menu';
 
 @NgModule({
   declarations: [
@@ -37,7 +43,12 @@ import { PostListComponent } from './post/post-list/post-list.component';
     MatToolbarModule,
     MatIconModule,
     MatExpansionModule,
-    HttpClientModule
+    HttpClientModule,
+    MatMenuModule,
+    MatBadgeModule,
+    FlexLayoutModule,
+    MatProgressSpinnerModule,
+    MatSnackBarModule
 
   ],
   providers: [],
